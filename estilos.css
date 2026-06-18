@@ -79,6 +79,7 @@ h1 {
   transform: scale(1.05);
 }
 
+/* --- ESTILOS DE LA TABLA (VISTA ORDENADOR) --- */
 .contenedor-tabla {
   width: 100%;
   max-width: 1200px;
@@ -145,15 +146,32 @@ body.menu1 .columna-comida {
   border: 1px solid #ffb3b9;
 }
 
-body.menu1 tbody tr:nth-of-type(even) td:not(.columna-comida) {
-  background-color: #fff0f1;
+/* --- OSCURECIMIENTO DE COLUMNAS INTERCALADAS (Martes, Jueves, Sábado) --- */
+body.menu1 tbody tr td:nth-of-type(3),  /* Martes */
+body.menu1 tbody tr td:nth-of-type(5),  /* Jueves */
+body.menu1 tbody tr td:nth-of-type(7) {
+  /* Sábado */
+  background-color: #fff2f3;
 }
 
+/* Filas pares para mantener el contraste dinámico */
+body.menu1 tbody tr:nth-of-type(even) td:not(.columna-comida) {
+  background-color: #fff6f7;
+}
+
+body.menu1 tbody tr:nth-of-type(even) td:nth-of-type(3),
+body.menu1 tbody tr:nth-of-type(even) td:nth-of-type(5),
+body.menu1 tbody tr:nth-of-type(even) td:nth-of-type(7) {
+  background-color: #ffe3e6;
+}
+
+/* Efecto hover al pasar el ratón */
 body.menu1 tbody tr td:not(.columna-comida):hover {
-  background-color: #ffcbd0;
+  background-color: #ffcbd0 !important;
   cursor: pointer;
 }
 
+/* --- VENTANA EMERGENTE (MODAL) --- */
 .modal {
   display: none;
   position: fixed;
@@ -211,38 +229,135 @@ body.menu1 .modal-contenido h2 {
   color: #ba2d2d;
 }
 
+/* --- OPTIMIZACIÓN COMPLETA PARA MÓVILES (RESPONSIVE) --- */
 @media (max-width: 600px) {
   body {
     padding: 10px;
-    background-size: 100% 100%;
+    background-size: cover;
     background-attachment: scroll;
-    background-position: center center;
-    justify-content: flex-start;
   }
 
   h1 {
-    font-size: 1.5rem;
-    padding: 10px 20px;
-    margin: 30px auto 20px auto;
-  }
-
-  .contenedor-tabla h1 {
     font-size: 1.4rem;
     padding: 10px 20px;
+    margin: 15px auto;
+    width: 90%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .contenedor-tabla {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.96);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ffcbd0;
+  }
+
+  td.columna-comida {
+    width: 100% !important;
+    background-color: #ff5757 !important;
+    color: white !important;
+    font-size: 1.1rem;
+    padding: 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    border: none !important;
+  }
+
+  td:not(.columna-comida) {
+    padding: 12px 10px;
+    text-align: left;
+    border: none !important;
+    border-bottom: 1px dashed #ffcbd0 !important;
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 95px;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    background-color: transparent !important; /* Reseteamos fondos de celda en móvil */
+  }
+
+  td:not(.columna-comida):last-child {
+    border-bottom: none !important;
+  }
+
+  td:not(.columna-comida):nth-of-type(2)::before {
+    content: "Lunes:";
+  }
+  td:not(.columna-comida):nth-of-type(3)::before {
+    content: "Martes:";
+  }
+  td:not(.columna-comida):nth-of-type(4)::before {
+    content: "Miércoles:";
+  }
+  td:not(.columna-comida):nth-of-type(5)::before {
+    content: "Jueves:";
+  }
+  td:not(.columna-comida):nth-of-type(6)::before {
+    content: "Viernes:";
+  }
+  td:not(.columna-comida):nth-of-type(7)::before {
+    content: "Sábado:";
+  }
+  td:not(.columna-comida):nth-of-type(8)::before {
+    content: "Domingo:";
+  }
+
+  td:not(.columna-comida)::before {
+    position: absolute;
+    left: 10px;
+    width: 80px;
+    font-weight: bold;
+    color: #ba2d2d;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+
+  /* Distinción visual para las etiquetas de Martes, Jueves y Sábado en el móvil */
+  td:not(.columna-comida):nth-of-type(3)::before,
+  td:not(.columna-comida):nth-of-type(5)::before,
+  td:not(.columna-comida):nth-of-type(7)::before {
+    color: #ff5757;
+  }
+
+  body.menu1 tbody tr td:not(.columna-comida):hover {
+    background-color: #fff0f1 !important;
+    border-radius: 4px;
   }
 
   .contenedor-circulos {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 0 15px;
-    margin-top: 0;
   }
-
   .circulo {
     width: 100px;
     height: 100px;
   }
-
   .circulo img {
     width: 60px;
     height: 60px;
