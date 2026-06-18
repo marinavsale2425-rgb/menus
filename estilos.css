@@ -1,11 +1,12 @@
 body {
   background-image: url("./imagenes/fondo.png");
   background-color: #f4f4f4;
-  background-size: 100% 100%;
-  background-position: center;
+  /* CAMBIO CLAVE: "cover" hace que el fondo cubra TODA la página, aunque tenga scroll */
+  background-size: cover;
+  background-position: center top;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 80vh; /* Ajustado a 80vh como solicitaste */
+  background-attachment: fixed; /* El fondo se queda quieto y el contenido desliza encima */
+  min-height: 100vh;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 15px;
@@ -13,6 +14,12 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
+}
+
+/* --- LOGICÁ DE EMPUJE (Bajar elementos en la pantalla principal) --- */
+/* Añadimos un margen arriba al título de la pantalla principal para bajarlo */
+body:not(.menu1) h1 {
+  margin: 80px auto 25px auto; /* Ese '80px' empuja el título y los números hacia abajo */
 }
 
 h1 {
@@ -67,54 +74,39 @@ h1 {
 
 /* --- ANIMACIÓN GENERAL DEL HOVER --- */
 .contenedor-circulos a:hover .circulo {
-  transform: scale(1.08); /* Crece un 8% */
+  transform: scale(1.08);
   cursor: pointer;
 }
 
 /* --- HOVERS PERSONALIZADOS POR COLOR --- */
-/* Menú 1 - Rojo */
 .btn-menu1:hover .circulo {
   background-color: #ff5757;
   box-shadow: 0px 15px 30px rgba(255, 87, 87, 0.5);
 }
-
-/* Menú 2 - Naranja */
 .btn-menu2:hover .circulo {
   background-color: #ff914d;
   box-shadow: 0px 15px 30px rgba(255, 145, 77, 0.5);
 }
-
-/* Menú 3 - Rosa */
 .btn-menu3:hover .circulo {
   background-color: #ff66c4;
   box-shadow: 0px 15px 30px rgba(255, 102, 196, 0.5);
 }
-
-/* Menú 4 - Morado */
 .btn-menu4:hover .circulo {
   background-color: #cb6ce6;
   box-shadow: 0px 15px 30px rgba(203, 108, 230, 0.5);
 }
-
-/* Menú 5 - Azul */
 .btn-menu5:hover .circulo {
   background-color: #5170ff;
   box-shadow: 0px 15px 30px rgba(81, 112, 255, 0.5);
 }
-
-/* Menú 6 - Celeste */
 .btn-menu6:hover .circulo {
   background-color: #5ce1e6;
   box-shadow: 0px 15px 30px rgba(92, 225, 230, 0.5);
 }
-
-/* Menú 7 - Verde */
 .btn-menu7:hover .circulo {
   background-color: #7ed957;
   box-shadow: 0px 15px 30px rgba(126, 217, 87, 0.5);
 }
-
-/* Menú 8 - Amarillo */
 .btn-menu8:hover .circulo {
   background-color: #ffde59;
   box-shadow: 0px 15px 30px rgba(255, 222, 89, 0.5);
@@ -140,7 +132,7 @@ h1 {
   transform: scale(1.05);
 }
 
-/* --- ESTILOS DE LA TABLA (COMPARTIDOS ORDENADOR Y MÓVIL) --- */
+/* --- ESTILOS DE LA TABLA --- */
 .contenedor-tabla {
   width: 100%;
   max-width: 1200px;
@@ -186,6 +178,7 @@ body.menu1 h1 {
   background-color: #ff5757;
   box-shadow: 0px 10px 25px rgba(255, 87, 87, 0.35);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  margin-top: 10px; /* En el menú 1 no queremos tanto espacio arriba para ver la tabla antes */
 }
 
 body.menu1 thead tr {
@@ -271,40 +264,22 @@ body.menu1 .modal-contenido h2 {
   text-transform: uppercase;
 }
 
-.modal-contenido p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #333;
-  text-align: left;
-  margin-bottom: 0;
-}
-
-.cerrar-modal {
-  position: absolute;
-  top: 8px;
-  right: 15px;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #ff5757;
-  cursor: pointer;
-}
-
-.cerrar-modal:hover {
-  color: #ba2d2d;
-}
-
 /* --- ADAPTACIONES EN MÓVIL --- */
 @media (max-width: 600px) {
   body {
     padding: 10px;
-    background-size: 100% 100%;
-    background-attachment: scroll;
+    background-size: cover; /* Asegura que en móvil el fondo cubra todo también */
+    background-attachment: scroll; /* Mejora el rendimiento en navegadores móviles */
+  }
+
+  /* Ajustamos el empuje en móvil para que no sea excesivo pero se note */
+  body:not(.menu1) h1 {
+    margin: 60px auto 20px auto;
   }
 
   h1 {
     font-size: 1.4rem;
     padding: 10px 20px;
-    margin: 15px auto;
   }
 
   th,
