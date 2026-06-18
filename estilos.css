@@ -1,0 +1,55 @@
+body {
+  background-image: url("./imagenes/fondo.png");
+  background-color: #f4f4f4;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 70vh;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  background-color: black;
+  padding: 15px 30px;
+  border-radius: 8px;
+  display: table;
+  margin: 0 auto 20px auto;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.35);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.contenedor-circulos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 800px;
+  margin: 20px auto 0 auto;
+  padding: 0 20px;
+}
+
+.circulo {
+  width: 120px;
+  height: 120px;
+  background-color: black;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.circulo img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
