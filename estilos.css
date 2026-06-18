@@ -57,7 +57,7 @@ h1 {
 @media (max-width: 600px) {
   body {
     padding: 10px;
-    background-size: cover;
+    background-size: auto 100%;
     background-position: center bottom;
     justify-content: flex-start;
   }
