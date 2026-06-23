@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de la compra - Menú 1</title>
+    <link rel="stylesheet" href="estilos.css" />
+    <style>
+      /* Contenedor para alinear los botones de arriba */
+      .cabecera-botones {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto 5px auto;
+      }
+      /* Botón de restablecer */
+      .boton-restablecer {
+        display: inline-block;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 0.85rem;
+        cursor: pointer;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+      .boton-restablecer:hover {
+        transform: scale(1.05);
+        background-color: #5a6268;
+      }
+      /* Ajustes de alineación para las columnas de la tabla */
+      .columna-check {
+        width: 40px;
+        text-align: center;
+      }
+      .columna-eliminar {
+        width: 50px;
+        text-align: center;
+      }
+      .tabla-compra input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #ff5757;
+        vertical-align: middle;
+      }
+      .tabla-compra td {
+        text-align: left;
+      }
+      .tabla-compra td:nth-child(3) {
+        text-align: center;
+      }
+      /* Botón de eliminar personalizado */
+      .btn-eliminar {
+        background: none;
+        border: none;
+        color: #ff5757;
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: 4px;
+        transition:
+          background-color 0.2s,
+          transform 0.1s;
+      }
+      .btn-eliminar:hover {
+        background-color: rgba(255, 87, 87, 0.1);
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body class="menu1">
+    <div class="cabecera-botones">
+      <a href="menu1.html" class="boton-volver">← Volver al menú</a>
+      <button class="boton-restablecer" id="btn-restablecer">
+        🔄 Restablecer lista
+      </button>
+    </div>
+
+    <h1>Lista de la compra</h1>
+
+    <div class="contenedor-agregar-producto">
+      <input type="text" id="nuevo-nombre" placeholder="Nombre del producto" />
+      <input
+        type="text"
+        id="nueva-cantidad"
+        class="input-cantidad"
+        placeholder="Cant. (ej: 200g)"
+      />
+      <select id="nueva-seccion">
+        <option value="verduras">🍉 Verduras y frutas</option>
+        <option value="carnes">🥩 Carnes y pescados</option>
+        <option value="despensa">📦 Despensa</option>
+        <option value="lacteos">🥚 Lácteos y huevos</option>
+        <option value="congelados">❄️ Congelados</option>
+        <option value="bebidas">🥤 Bebidas</option>
+        <option value="panaderia">🥖 Panadería</option>
+        <option value="limpieza">🧹 Limpieza y hogar</option>
+        <option value="higiene">🧴 Higiene y cuidado personal</option>
+      </select>
+      <button class="boton-agregar" id="btn-agregar">Añadir</button>
+    </div>
+
+    <div class="contenedor-tabla">
+      <table class="tabla-compra">
+        <thead>
+          <tr>
+            <th class="columna-check"></th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th class="columna-eliminar"></th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla-compra">
+          <tr class="fila-seccion" data-seccion="verduras">
+            <td colspan="4" class="seccion-compra-titulo">
+              🍉 Verduras y frutas
+            </td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Aguacate</td>
+            <td>220g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Boniato</td>
+            <td>500g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Brócoli</td>
+            <td>80g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Calabacín</td>
+            <td>210g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Canónigos</td>
+            <td>110g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Cebolla</td>
+            <td>290g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Champiñón</td>
+            <td>30g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Espinaca</td>
+            <td>20g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Lechuga</td>
+            <td>140g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Manzana</td>
+            <td>900g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Pepino</td>
+            <td>40g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Pimiento rojo y verde congelado</td>
+            <td>100g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Plátano</td>
+            <td>400g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Puerro</td>
+            <td>50g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Tomate</td>
+            <td>150g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="verduras">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Zanahoria</td>
+            <td>50g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+
+          <tr class="fila-seccion" data-seccion="carnes">
+            <td colspan="4" class="seccion-compra-titulo">
+              🥩 Carnes y pescados
+            </td>
+          </tr>
+          <tr data-seccion="carnes">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Atún al natural</td>
+            <td>200g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="carnes">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Carne molida de cerdo</td>
+            <td>200g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="carnes">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Fiambre de pavo</td>
+            <td>160g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="carnes">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Gamba</td>
+            <td>300g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="carnes">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Hamburguesa de lomo</td>
+            <td>240g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="carnes">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Jamón serrano</td>
+            <td>376g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="carnes">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Salmón</td>
+            <td>250g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+
+          <tr class="fila-seccion" data-seccion="despensa">
+            <td colspan="4" class="seccion-compra-titulo">📦 Despensa</td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Arroz basmati</td>
+            <td>320g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Crema de cacahuete</td>
+            <td>160g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Garbanzos</td>
+            <td>430g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Gnocchis</td>
+            <td>120g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Harina de avena</td>
+            <td>160g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Masa pizza cereales y semillas</td>
+            <td>520g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Mermelada 0%</td>
+            <td>80g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Muesli 0%</td>
+            <td>40g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Noodles de arroz</td>
+            <td>140g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Palomitas de maíz</td>
+            <td>240g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Pan de molde espelta 100%</td>
+            <td>330g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Pan integral</td>
+            <td>330g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Pasta alimenticia integral</td>
+            <td>120g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Pasta de lentejas</td>
+            <td>180g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Salsa de soja</td>
+            <td>26g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Tomate frito sin azúcares</td>
+            <td>140g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="despensa">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Tortillas 100% integrales</td>
+            <td>144g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+
+          <tr class="fila-seccion" data-seccion="lacteos">
+            <td colspan="4" class="seccion-compra-titulo">
+              🥚 Lácteos y huevos
+            </td>
+          </tr>
+          <tr data-seccion="lacteos">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Claras de huevo</td>
+            <td>400g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="lacteos">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Huevos</td>
+            <td>1000g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="lacteos">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Kéfir</td>
+            <td>600g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="lacteos">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Queso fresco</td>
+            <td>30g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="lacteos">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Queso manchego semicurado</td>
+            <td>52g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="lacteos">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Queso mozzarella</td>
+            <td>220g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="lacteos">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Queso tierno light</td>
+            <td>200g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+          <tr data-seccion="lacteos">
+            <td class="columna-check"><input type="checkbox" /></td>
+            <td>Yogurt griego ligero</td>
+            <td>500g</td>
+            <td class="columna-eliminar"></td>
+          </tr>
+
+          <tr
+            class="fila-seccion"
+            data-seccion="congelados"
+            style="display: none"
+          >
+            <td colspan="4" class="seccion-compra-titulo">❄️ Congelados</td>
+          </tr>
+          <tr class="fila-seccion" data-seccion="bebidas" style="display: none">
+            <td colspan="4" class="seccion-compra-titulo">🥤 Bebidas</td>
+          </tr>
+          <tr
+            class="fila-seccion"
+            data-seccion="panaderia"
+            style="display: none"
+          >
+            <td colspan="4" class="seccion-compra-titulo">🥖 Panadería</td>
+          </tr>
+          <tr
+            class="fila-seccion"
+            data-seccion="limpieza"
+            style="display: none"
+          >
+            <td colspan="4" class="seccion-compra-titulo">
+              🧹 Limpieza y hogar
+            </td>
+          </tr>
+          <tr class="fila-seccion" data-seccion="higiene" style="display: none">
+            <td colspan="4" class="seccion-compra-titulo">
+              🧴 Higiene y cuidado personal
+            </td>
+          </tr>
+
+          <tr
+            class="fila-seccion"
+            id="cabecera-comprados"
+            style="display: none"
+          >
+            <td colspan="4" class="seccion-comprados-titulo">
+              ✅ Ya comprados
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      const cuerpoTabla = document.getElementById("cuerpo-tabla-compra");
+      const btnAgregar = document.getElementById("btn-agregar");
+      const btnRestablecer = document.getElementById("btn-restablecer");
+      const cabeceraComprados = document.getElementById("cabecera-comprados");
+
+      // Guardar el estado actual en LocalStorage
+      function guardarEstado() {
+        const estadoProductos = [];
+        const filas = cuerpoTabla.querySelectorAll("tr:not(.fila-seccion)");
+
+        filas.forEach((fila) => {
+          const checkbox = fila.querySelector('input[type="checkbox"]');
+          const celdas = fila.querySelectorAll("td");
+          const esManual = fila.querySelector(".btn-eliminar") !== null;
+
+          estadoProductos.push({
+            nombre: celdas[1].textContent,
+            cantidad: celdas[2].textContent,
+            seccion: fila.getAttribute("data-seccion"),
+            comprado: checkbox ? checkbox.checked : false,
+            manual: esManual,
+          });
+        });
+
+        localStorage.setItem(
+          "listaCompraMenu1",
+          JSON.stringify(estadoProductos),
+        );
+      }
+
+      // Cargar el estado guardado al iniciar
+      function cargarEstado() {
+        const datosGuardados = localStorage.getItem("listaCompraMenu1");
+        if (!datosGuardados) {
+          reordenarLista();
+          return;
+        }
+
+        const productos = JSON.parse(datosGuardados);
+
+        // Separamos los productos base que ya existen en el HTML de los manuales que hay que recrear
+        const filasExistentes = Array.from(
+          cuerpoTabla.querySelectorAll("tr:not(.fila-seccion)"),
+        );
+
+        // Limpiar productos manuales previos del HTML para evitar duplicados
+        filasExistentes.forEach((f) => {
+          if (f.querySelector(".btn-eliminar")) f.remove();
+        });
+
+        productos.forEach((prod) => {
+          // Buscar si ya existe la fila en el HTML (los base)
+          const filaExistente = Array.from(
+            cuerpoTabla.querySelectorAll("tr:not(.fila-seccion)"),
+          ).find(
+            (f) =>
+              f.getAttribute("data-seccion") === prod.seccion &&
+              f.querySelectorAll("td")[1].textContent === prod.nombre,
+          );
+
+          if (filaExistente) {
+            const checkbox = filaExistente.querySelector(
+              'input[type="checkbox"]',
+            );
+            if (checkbox) {
+              checkbox.checked = prod.comprado;
+              if (prod.comprado) filaExistente.classList.add("item-comprado");
+              else filaExistente.classList.remove("item-comprado");
+            }
+          } else if (prod.manual) {
+            // Recrear producto manual
+            inyectarFilaManual(
+              prod.nombre,
+              prod.cantidad,
+              prod.seccion,
+              prod.comprado,
+            );
+          }
+        });
+
+        reordenarLista();
+      }
+
+      // Función para inyectar un nuevo producto manual en el DOM
+      function inyectarFilaManual(nombre, cantidad, seccion, comprado = false) {
+        const nuevaFila = document.createElement("tr");
+        nuevaFila.setAttribute("data-seccion", seccion);
+        if (comprado) nuevaFila.classList.add("item-comprado");
+
+        const celdaCheck = document.createElement("td");
+        celdaCheck.className = "columna-check";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = comprado;
+        celdaCheck.appendChild(checkbox);
+
+        const celdaNombre = document.createElement("td");
+        celdaNombre.textContent = nombre;
+
+        const celdaCantidad = document.createElement("td");
+        celdaCantidad.textContent = cantidad;
+
+        const celdaEliminar = document.createElement("td");
+        celdaEliminar.className = "columna-eliminar";
+        const botonEliminar = document.createElement("button");
+        botonEliminar.className = "btn-eliminar";
+        botonEliminar.innerHTML = "❌";
+        celdaEliminar.appendChild(botonEliminar);
+
+        nuevaFila.appendChild(celdaCheck);
+        nuevaFila.appendChild(celdaNombre);
+        nuevaFila.appendChild(celdaCantidad);
+        nuevaFila.appendChild(celdaEliminar);
+
+        cuerpoTabla.appendChild(nuevaFila);
+      }
+
+      function reordenarLista() {
+        const filas = Array.from(cuerpoTabla.querySelectorAll("tr"));
+        const filasSeccion = filas.filter((f) =>
+          f.classList.contains("fila-seccion"),
+        );
+        const filasProductos = filas.filter(
+          (f) => !f.classList.contains("fila-seccion"),
+        );
+
+        filasSeccion.forEach((fs) => {
+          if (fs.id === "cabecera-comprados") return;
+          const sec = fs.getAttribute("data-seccion");
+          const tieneProductosActivos = filasProductos.some(
+            (fp) =>
+              fp.getAttribute("data-seccion") === sec &&
+              !fp.classList.contains("item-comprado"),
+          );
+
+          if (
+            ["verduras", "carnes", "despensa", "lacteos"].includes(sec) ||
+            tieneProductosActivos
+          ) {
+            fs.style.display = "";
+          } else {
+            fs.style.display = "none";
+          }
+        });
+
+        filasSeccion.forEach((fs) => {
+          if (fs.id !== "cabecera-comprados") cuerpoTabla.appendChild(fs);
+        });
+
+        filasProductos.forEach((fp) => {
+          if (!fp.classList.contains("item-comprado")) {
+            const seccion = fp.getAttribute("data-seccion");
+            const cabeceraSeccion = cuerpoTabla.querySelector(
+              `.fila-seccion[data-seccion="${seccion}"]`,
+            );
+            if (cabeceraSeccion) {
+              cabeceraSeccion.after(fp);
+            }
+          }
+        });
+
+        const tieneComprados = filasProductos.some((fp) =>
+          fp.classList.contains("item-comprado"),
+        );
+        if (tieneComprados) {
+          cabeceraComprados.style.display = "";
+          cuerpoTabla.appendChild(cabeceraComprados);
+
+          filasProductos.forEach((fp) => {
+            if (fp.classList.contains("item-comprado")) {
+              cuerpoTabla.appendChild(fp);
+            }
+          });
+        } else {
+          cabeceraComprados.style.display = "none";
+        }
+      }
+
+      // Evento cambio de checkbox (tachar y guardar)
+      cuerpoTabla.addEventListener("change", (e) => {
+        if (e.target.type === "checkbox") {
+          const fila = e.target.closest("tr");
+          if (fila) {
+            if (e.target.checked) {
+              fila.classList.add("item-comprado");
+            } else {
+              fila.classList.remove("item-comprado");
+            }
+            reordenarLista();
+            guardarEstado();
+          }
+        }
+      });
+
+      // Evento eliminar producto manual
+      cuerpoTabla.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn-eliminar")) {
+          const fila = e.target.closest("tr");
+          if (fila) {
+            fila.remove();
+            reordenarLista();
+            guardarEstado();
+          }
+        }
+      });
+
+      // Añadir producto manual personalizado
+      btnAgregar.addEventListener("click", () => {
+        const nombre = document.getElementById("nuevo-nombre").value.trim();
+        const cantidad = document.getElementById("nueva-cantidad").value.trim();
+        const seccion = document.getElementById("nueva-seccion").value;
+
+        if (nombre === "" || cantidad === "") {
+          alert("Por favor, rellena el nombre y la cantidad.");
+          return;
+        }
+
+        inyectarFilaManual(nombre, cantidad, seccion, false);
+
+        document.getElementById("nuevo-nombre").value = "";
+        document.getElementById("nueva-cantidad").value = "";
+
+        reordenarLista();
+        guardarEstado();
+      });
+
+      // Evento para el botón superior "Restablecer lista"
+      btnRestablecer.addEventListener("click", () => {
+        if (
+          confirm(
+            "¿Seguro que deseas desmarcar todo y borrar los productos personalizados añadidos manualmente?",
+          )
+        ) {
+          localStorage.removeItem("listaCompraMenu1");
+
+          // Quitar clases tachadas y desmarcar checkboxes de productos base
+          const filas = cuerpoTabla.querySelectorAll("tr:not(.fila-seccion)");
+          filas.forEach((fila) => {
+            if (fila.querySelector(".btn-eliminar")) {
+              fila.remove(); // Borra los manuales
+            } else {
+              fila.classList.remove("item-comprado");
+              const cb = fila.querySelector('input[type="checkbox"]');
+              if (cb) cb.checked = false;
+            }
+          });
+
+          reordenarLista();
+        }
+      });
+
+      // Inicializar cargando el estado de memoria previa
+      cargarEstado();
+    </script>
+  </body>
+</html>
