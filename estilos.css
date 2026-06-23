@@ -1,11 +1,10 @@
 body {
   background-image: url("./imagenes/fondo.png");
   background-color: #f4f4f4;
-  /* CAMBIO CLAVE: "cover" hace que el fondo cubra TODA la página, aunque tenga scroll */
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* El fondo se queda quieto y el contenido desliza encima */
+  background-attachment: fixed;
   min-height: 100vh;
   font-family: Arial, sans-serif;
   margin: 0;
@@ -16,10 +15,8 @@ body {
   box-sizing: border-box;
 }
 
-/* --- LOGICÁ DE EMPUJE (Bajar elementos en la pantalla principal) --- */
-/* Añadimos un margen arriba al título de la pantalla principal para bajarlo */
 body:not(.menu1) h1 {
-  margin: 80px auto 25px auto; /* Ese '80px' empuja el título y los números hacia abajo */
+  margin: 80px auto 25px auto;
 }
 
 h1 {
@@ -35,7 +32,6 @@ h1 {
   font-size: 1.8rem;
 }
 
-/* --- CONTENEDOR DE LOS CÍRCULOS (ÍNDICE) --- */
 .contenedor-circulos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -72,13 +68,11 @@ h1 {
   object-fit: contain;
 }
 
-/* --- ANIMACIÓN GENERAL DEL HOVER --- */
 .contenedor-circulos a:hover .circulo {
   transform: scale(1.08);
   cursor: pointer;
 }
 
-/* --- HOVERS PERSONALIZADOS POR COLOR --- */
 .btn-menu1:hover .circulo {
   background-color: #ff5757;
   box-shadow: 0px 15px 30px rgba(255, 87, 87, 0.5);
@@ -112,7 +106,6 @@ h1 {
   box-shadow: 0px 15px 30px rgba(255, 222, 89, 0.5);
 }
 
-/* --- BOTÓN VOLVER --- */
 .boton-volver {
   display: inline-block;
   text-decoration: none;
@@ -132,7 +125,6 @@ h1 {
   transform: scale(1.05);
 }
 
-/* --- ESTILOS DE LA TABLA --- */
 .contenedor-tabla {
   width: 100%;
   max-width: 1200px;
@@ -178,7 +170,7 @@ body.menu1 h1 {
   background-color: #ff5757;
   box-shadow: 0px 10px 25px rgba(255, 87, 87, 0.35);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-  margin-top: 10px; /* En el menú 1 no queremos tanto espacio arriba para ver la tabla antes */
+  margin-top: 10px;
 }
 
 body.menu1 thead tr {
@@ -201,7 +193,6 @@ body.menu1 .columna-comida {
   border: 1px solid #ffb3b9;
 }
 
-/* --- COLUMNAS MÁS OSCURAS --- */
 body.menu1 tbody tr td:nth-of-type(3),
 body.menu1 tbody tr td:nth-of-type(5),
 body.menu1 tbody tr td:nth-of-type(7) {
@@ -228,7 +219,6 @@ body.menu1 tbody tr td:not(.columna-comida):hover {
   cursor: pointer;
 }
 
-/* --- VENTANA EMERGENTE (MODAL) --- */
 .modal {
   display: none;
   position: fixed;
@@ -262,17 +252,31 @@ body.menu1 .modal-contenido h2 {
   border-bottom: 2px solid #ffcbd0;
   padding-bottom: 10px;
   text-transform: uppercase;
+  padding-right: 25px;
 }
 
-/* --- ADAPTACIONES EN MÓVIL --- */
+.cerrar-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff5757;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.cerrar-modal:hover {
+  transform: scale(1.15);
+}
+
 @media (max-width: 600px) {
   body {
     padding: 10px;
-    background-size: cover; /* Asegura que en móvil el fondo cubra todo también */
-    background-attachment: scroll; /* Mejora el rendimiento en navegadores móviles */
+    background-size: cover;
+    background-attachment: scroll;
   }
 
-  /* Ajustamos el empuje en móvil para que no sea excesivo pero se note */
   body:not(.menu1) h1 {
     margin: 60px auto 20px auto;
   }
